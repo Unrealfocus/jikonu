@@ -14,7 +14,7 @@
 }
 
 
-.link a {
+a {
     font-family: Rubik;
     font-weight: 400;
     font-size: 16px;
@@ -50,7 +50,9 @@ button:hover {
     opacity: 50%;
     cursor: pointer;
 }
-
+.mobile_menu{
+    display: none;
+}
 .banner {
     display: flex;
     padding: 120px 0px 120px 20px;
@@ -148,6 +150,12 @@ button:hover {
 
 .third_service button {
     background-color: #2E2E2E;
+}
+#demo {
+    display: none;
+}
+#menu{
+    display: none;
 }
 #about_banner {
     width: 100%;

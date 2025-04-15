@@ -26,6 +26,20 @@
                 Contact Us
             </button>
         </a>
+        <img id="menu" onclick="document.getElementById('demo').style.display='flex'" src="./assets/menu.svg" alt="">
+        <div id="demo" class="mobile_menu">
+            <div onclick="document.getElementById('demo').style.display='none'" class="cancel_div">
+                <img class="cancel" src="./assets/x.svg" alt="">
+            </div>
+            <a href="./">Home</a>
+            <a href="#services">Our services</a>
+            <a href="./about.html">About us</a>
+            <a href="./contact.html">
+                <button>
+                    Contact Us
+                </button>
+            </a>
+        </div>
     </section>
     <section class="contact">
         <div>
@@ -41,7 +55,9 @@
                     </div>
                     <h3 class="support-title">Whatsapp Chat</h3>
                     <p class="support-description">We are available Sunday to Friday 7 pm PST</p>
-                    <button href="https://wa.me/14244274006">Chat Now</button>
+                    <a href="https://wa.me/14244274006">
+                        <button>Chat Now</button>
+                    </a>
                 </div>
 
                 <div class="support-card ">
@@ -52,8 +68,10 @@
                     <h3 class="support-title">Create a Ticket</h3>
                     <p class="support-description">We are available 24/7 to support you</p>
 
-                    <button class="ticket" href="https://cateredbyafrica.freshdesk.com/support/tickets/new">Submit your
-                        Ticket</button>
+                    <a href="https://cateredbyafrica.freshdesk.com/support/tickets/new">
+                        <button class="ticket">Submit your
+                            Ticket</button>
+                    </a>
                 </div>
             </div>
         </div>
