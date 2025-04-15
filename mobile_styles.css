@@ -445,8 +445,8 @@ footer {
 }
 
 .x {
-    position: fixed;
-    top: 20px;
+    position: absolute;
+    top: -30px;
     right: 20px;
     z-index: 1001;
     cursor: pointer;
