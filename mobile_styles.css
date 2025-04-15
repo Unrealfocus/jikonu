@@ -419,14 +419,14 @@ footer {
     position: fixed;
     top: 0;
     right: -100%;
-    width: 80%;
-    max-width: 300px;
+    width: 100%;
+    max-width: 500px;
     height: 100vh;
     background-color: white;
     transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 60px 20px;
     box-sizing: border-box;
-    z-index: 999;
+    z-index:999;
 }
 
 .menu a {
@@ -448,7 +448,7 @@ footer {
     position: absolute;
     top: -30px;
     right: 20px;
-    z-index: 1001;
+    z-index: 1000;
     cursor: pointer;
 }
 
@@ -485,8 +485,9 @@ footer {
     cursor: pointer;
     height: 40px;
     width: 40px;
-    position: fixed;
-    top: 20px;
-    right: 20px;
+    position: absolute;
+    top: 0px;
+    right: 35px;
     z-index: 1001;
+  
 }
