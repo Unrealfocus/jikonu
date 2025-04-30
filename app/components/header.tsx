@@ -1,0 +1,27 @@
+"use client"
+
+import Link from 'next/link';
+import Image from 'next/image';
+import MobileMenu from './mobileMenu';
+
+export default function Header() {
+  return (
+    <section className="header px-[0px]">
+      <Link href="/">
+        <Image src="/assets/jikonu.svg" alt="Jikonu Logo" width={100} height={40} />
+      </Link>
+      <div className="link">
+        <Link href="#services">Our services</Link>
+        <Link href="/about">About us</Link>
+      </div>
+      <Link href="/contact">
+        <button className='hidden md:block '>
+          Contact Us
+        </button>
+      </Link>
+      <div className=' md:hidden block'>
+        <MobileMenu />
+      </div>
+    </section>
+  );
+}
