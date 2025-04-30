@@ -86,7 +86,6 @@ button:hover {
   padding: 0px;
   margin: 0px;
 }
-
 .banner_content p {
   font-family: Rubik;
   font-weight: 500;
@@ -123,7 +122,6 @@ button:hover {
   text-align: center;
   margin: 0px;
 }
-
 .left_service,
 .right_service {
   display: flex;
