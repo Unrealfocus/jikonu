@@ -21,10 +21,10 @@ export default function MobileMenu() {
       
       <div className="menu">
         <Link onClick={() => setIsActive(!isActive)} href="/">Home</Link>
-        <Link href="#services">Our services</Link>
+        <Link  onClick={() => setIsActive(!isActive)} href="/contact">Contact us</Link>
         <Link onClick={() => setIsActive(!isActive)} href="/about">About us</Link>
-        <Link href="/contact">
-          <button>Contact Us</button>
+        <Link href="https://form.jotform.com/250930986221155">
+          <button>Sign up</button>
         </Link>
       </div>
     </div>

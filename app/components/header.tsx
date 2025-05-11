@@ -11,12 +11,12 @@ export default function Header() {
         <Image src="/assets/jikonu.svg" alt="Jikonu Logo" width={100} height={40} />
       </Link>
       <div className="link">
-        <Link href="#services">Our services</Link>
+        <Link href="/contact">Contact us</Link>
         <Link href="/about">About us</Link>
       </div>
-      <Link href="/contact">
+      <Link href="https://form.jotform.com/250930986221155">
         <button className='hidden md:block '>
-          Contact Us
+          Sign up
         </button>
       </Link>
       <div className=' md:hidden block'>

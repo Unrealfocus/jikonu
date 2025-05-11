@@ -9,6 +9,7 @@ body {}
   justify-content: space-between;
   align-items: center;
   position: relative;
+  padding: 20px 20px 20px 0px;
 }
 
 .link {
@@ -495,6 +496,7 @@ footer {
     justify-content: space-between;
     align-items: center;
     position: relative;
+    padding: 0px;
   }
 
   .link {

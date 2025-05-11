@@ -35,7 +35,7 @@ export default function Banner() {
       </div>
       < SlideUp>
         <div className=" md:w-[600px] flex">
-          <img src="/assets/crop-banner.png" className='h-[400px] w-[800px]' alt="Banner" />
+          <img src="/assets/banner_svg.svg" className='h-[400px] w-[800px]' alt="Banner" />
         </div>
       </SlideUp>
 
