@@ -6,31 +6,31 @@ export default function Features() {
   return (
     <section className="feature">
       <SlideUp transition={{
-        duration: 0.5,
-        delay: 0.5,
+        duration: 0.2,
+        delay: 0.2,
         ease: "easeOut"
       }}>
         <h1>Why Thousands of <br /> Businesses Trust Us?</h1>
       </SlideUp>
       <SlideUp transition={{
-        duration: 0.8,
-        delay: 0.9,
+        duration: 0.5,
+        delay: 0.4,
         ease: "easeOut"
       }}>
         <p>Tailored strategies for small <br /> Businesses</p>
       </SlideUp>
       <div className="feature_banner">
         <SlideUp transition={{
-          duration: 0.5,
-          delay: 0.5,
+          duration: 0.2,
+          delay: 0.2,
           ease: "easeOut"
         }}>
           <Image src="/assets/feature.svg" alt="Features" width={500} height={400} />
         </SlideUp>
         <div className="feature_content_container">
           <SlideUp transition={{
-            duration: 0.8,
-            delay: 0.5,
+            duration: 0.5,
+            delay: 0.2,
             ease: "easeOut"
           }}>
             <div className="feature_content">
@@ -39,8 +39,8 @@ export default function Features() {
             </div>
           </SlideUp>
           <SlideUp transition={{
-            duration: 0.9,
-            delay: 0.7,
+            duration: 0.5,
+            delay: 0.2,
             ease: "easeOut"
           }}>
             <div className="feature_content">
@@ -49,8 +49,8 @@ export default function Features() {
             </div>
           </SlideUp>
           <SlideUp transition={{
-            duration: 0.5,
-            delay: 0.9,
+            duration: 0.3,
+            delay: 0.4,
             ease: "easeOut"
           }}>
             <div className="feature_content">

@@ -1,124 +1,60 @@
-"use client"
-import React from 'react'
-import { SlideUp } from '../components/animation/slideUp'
-import ButtonAnimate from '../components/animation/buttonAnimate'
+"use client";
+import React from "react";
+import { SlideUp } from "../components/animation/slideUp";
+import { Card } from "@/components/ui/card";
+import Loader from "../components/animation/loader";
 
-const page = () => {
+const Page = () => {
     return (
-        <div>
-            <section className="banner">
-                <div className="banner_content text-center flex flex-col justify-center items-center w-full">
-                    < SlideUp transition={{
-                        duration: 0.5,
-                        delay: 0.5,
-                        ease: "easeOut"
-                    }}>
-                        <h1>Contact Us</h1>
-                    </SlideUp>
-                    < SlideUp transition={{
-                        duration: 0.7,
-                        delay: 0.7,
-                        ease: "easeOut"
-                    }}>
-                        <p>Get in Touch</p>
-                        <p>We'd love to hear from you! <br/>Reach out for collaborations, inquiries, or just to say hello.</p>
-                    </SlideUp>
+        <>
+            <Loader delay={1000} />
+            <div className="p-[30px] mb-[150px] md:mb-[0px]">
+                <section className="md:-mt-[100px]">
+                    <div className="flex  flex-col-reverse md:flex-row  justify-between items-center">
+                        <SlideUp>
+                            <div className="space-y-4">
+                                <div className="flex gap-[10px]">
+                                    <a className="translate-y-1 " href="/">
+                                        <p className="text-[16px] hover:text-[#F29727] text-[#cfcfcf]">
+                                            Home
+                                        </p>
+                                    </a>
+                                    <p className="text-[16px] text-[#363636]">Contacts</p>
+                                </div>
+                                <p className="font-[700px] text-[48px]">Contact us</p>
+                                <p className="text-[#787878] text-[16px]">
+                                    Get in Touch <br />
+                                    We'd love to hear from you! <br />
+                                    Reach out for collaborations, inquiries, or just to say hello
+                                </p>
 
-                </div>
-                {/* <div>
-                    < SlideUp transition={{
-                        duration: 0.5,
-                        delay: 0.5,
-                        ease: "easeOut"
-                    }}>
-                        <img className="contact_banner" src="./assets/contact.jpg" alt="" />
-                    </SlideUp>
-                </div> */}
-            </section>
-            <section className="about_block_container">
-                < SlideUp transition={{
-                    duration: 0.7,
-                    delay: 0.7,
-                    ease: "easeOut"
-                }}>
-                    <div className="about_box">
-
-                        <div className="support-card">
-                            <div className="support-icon">
-                                <img src="https://img.icons8.com/?size=100&amp;id=16713&amp;format=png&amp;color=000000"
-                                    alt="Customer Service Icon" width="30" height="30" />
+                                <div className="flex justify-between">
+                                    <a href="https://wa.me/14244274006">
+                                        <Card className="px-[20px] cursor-pointer hover:bg-[#F29727] text-[#363636] text-[16px] hover:text-white">
+                                            Whatsapp Chat
+                                        </Card>
+                                    </a>
+                                    <a href="https://cateredbyafrica.freshdesk.com/support/tickets/new">
+                                        <Card className="px-[20px] cursor-pointer hover:bg-[#F29727] text-[#363636] text-[16px] hover:text-white">
+                                            Create a Ticket
+                                        </Card>
+                                    </a>
+                                </div>
                             </div>
-                            <h3 className="support-title">Whatsapp Chat</h3>
-                            <p className="support-description">We are available Sunday to Friday 7 pm PST</p>
-                            <a href="https://wa.me/14244274006">
-                                <ButtonAnimate>Chat Now</ButtonAnimate>
-                            </a>
+                        </SlideUp>
+
+
+                        <div className="md:w-[60%]">
+                            <SlideUp>
+                                <img src="/assets/contactus.jpg" alt="contact us" />
+                            </SlideUp>
                         </div>
+
                     </div>
-                </SlideUp>
-                < SlideUp transition={{
-                    duration: 0.7,
-                    delay: 0.7,
-                    ease: "easeOut"
-                }}>
-                    <div className="about_box">
-                    <div className="support-card ">
-                            <div className="support-icon">
-                                <img src="https://img.icons8.com/?size=100&amp;id=XnbZDL7ivsy8&amp;format=png&amp;color=000000"
-                                    alt="Customer Service Icon" width="30" height="30" />
-                            </div>
-                            <h3 className="support-title">Create a Ticket</h3>
-                            <p className="support-description">We are available 24/7 to support you</p>
+                </section>
+            </div>
+        </>
+    );
+};
 
-                            <a href="https://cateredbyafrica.freshdesk.com/support/tickets/new">
-                                <ButtonAnimate >Submit your
-                                    Ticket</ButtonAnimate>
-                            </a>
-                        </div>
-                    </div>
-                </SlideUp>
-               
-            </section>
-            {/* <section className="contact">
-                <div>
-                    <img className="contact_banner" src="./assets/contact.jpg" alt="" />
-                </div>
-                <div className="banner_content contact_content">
-                    <h1>Contact Us</h1>
-                    <div className="support-container">
-                        <div className="support-card">
-                            <div className="support-icon">
-                                <img src="https://img.icons8.com/?size=100&amp;id=16713&amp;format=png&amp;color=000000"
-                                    alt="Customer Service Icon" width="30" height="30" />
-                            </div>
-                            <h3 className="support-title">Whatsapp Chat</h3>
-                            <p className="support-description">We are available Sunday to Friday 7 pm PST</p>
-                            <a href="https://wa.me/14244274006">
-                                <button>Chat Now</button>
-                            </a>
-                        </div>
-
-                        <div className="support-card ">
-                            <div className="support-icon">
-                                <img src="https://img.icons8.com/?size=100&amp;id=XnbZDL7ivsy8&amp;format=png&amp;color=000000"
-                                    alt="Customer Service Icon" width="30" height="30" />
-                            </div>
-                            <h3 className="support-title">Create a Ticket</h3>
-                            <p className="support-description">We are available 24/7 to support you</p>
-
-                            <a href="https://cateredbyafrica.freshdesk.com/support/tickets/new">
-                                <button className="ticket">Submit your
-                                    Ticket</button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-
-
-            </section> */}
-        </div>
-    )
-}
-
-export default page
+export default Page;

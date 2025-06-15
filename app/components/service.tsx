@@ -8,15 +8,15 @@ export default function Services() {
   return (
     <section id="services" className="services">
       <SlideUp transition={{
-        duration: 0.8,
-        delay: 0.5,
+        duration: 0.2,
+        delay: 0.2,
         ease: "easeOut"
       }}>
         <h1 className="services_title">Our Services</h1>
       </SlideUp>
       <SlideUp transition={{
-        duration: 0.8,
-        delay: 0.5,
+        duration: 0.3,
+        delay: 0.3,
         ease: "easeOut"
       }}>
         <div className="left_service">
@@ -35,8 +35,8 @@ export default function Services() {
         </div>
       </SlideUp>
       <SlideUp transition={{
-        duration: 0.8,
-        delay: 0.5,
+        duration: 0.3,
+        delay: 0.3,
         ease: "easeOut"
       }}>
         <div className="right_service">
@@ -54,8 +54,8 @@ export default function Services() {
         </div>
       </SlideUp>
       <SlideUp transition={{
-        duration: 0.8,
-        delay: 0.9,
+        duration: 0.3,
+        delay: 0.3,
         ease: "easeOut"
       }}>
         <div className="left_service">
