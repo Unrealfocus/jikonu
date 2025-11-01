@@ -18,9 +18,6 @@ export default function Header() {
   const { isAuthenticated: isInspectorAuthenticated, inspector } = useInspectorAuth();
   const cartCount = getCartCount();
 
-  // Hide main navigation if logged in as seller or inspector
-  const showMainNav = !isSellerAuthenticated && !isInspectorAuthenticated;
-
   const linkStyle = (path: string) =>
     pathname === path
       ? 'underline text-[red] underline-offset-4 text-black'
@@ -37,30 +34,26 @@ export default function Header() {
         </div>
       </Link>
 
-      {/* Main Navigation - Hidden when logged in as seller/inspector */}
-      {showMainNav && (
-        <div className="link flex gap-6">
-          <Link href="/" className={linkStyle("/")}>Home</Link>
-          <Link href="/products" className={linkStyle("/products")}>Products</Link>
-          <Link href="/about" className={linkStyle("/about")}>How it Works</Link>
-          <Link href="/contact" className={linkStyle("/contact")}>Contact</Link>
-        </div>
-      )}
+      {/* Main Navigation */}
+      <div className="link flex gap-6">
+        <Link href="/" className={linkStyle("/")}>Home</Link>
+        <Link href="/products" className={linkStyle("/products")}>Products</Link>
+        <Link href="/about" className={linkStyle("/about")}>How it Works</Link>
+        <Link href="/contact" className={linkStyle("/contact")}>Contact</Link>
+      </div>
 
       <div className="hidden md:flex items-center gap-4">
-        {/* Show cart only for regular users, not sellers/inspectors */}
-        {showMainNav && (
-          <Link href="/cart" className="relative">
-            <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors relative">
-              <ShoppingCart className="w-6 h-6 text-gray-700" />
-              {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#F29727] text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
-                  {cartCount}
-                </span>
-              )}
-            </button>
-          </Link>
-        )}
+        {/* Shopping Cart */}
+        <Link href="/cart" className="relative">
+          <button className="p-2 hover:bg-gray-100 rounded-lg transition-colors relative">
+            <ShoppingCart className="w-6 h-6 text-gray-700" />
+            {cartCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-[#F29727] text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
+          </button>
+        </Link>
 
         {/* Seller Account */}
         {isSellerAuthenticated ? (

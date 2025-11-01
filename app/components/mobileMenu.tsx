@@ -13,9 +13,6 @@ export default function MobileMenu() {
   const { isAuthenticated: isSellerAuthenticated, seller } = useSellerAuth();
   const { isAuthenticated: isInspectorAuthenticated, inspector } = useInspectorAuth();
 
-  // Hide main navigation if logged in as seller or inspector
-  const showMainNav = !isSellerAuthenticated && !isInspectorAuthenticated;
-
   return (
     <div className={`phone ${isActive ? 'active' : ''} `}>
       <div>
@@ -30,15 +27,11 @@ export default function MobileMenu() {
       <div className="menu-click-area" onClick={() => setIsActive(!isActive)}></div>
 
       <div className="menu">
-        {/* Show main navigation only for regular users */}
-        {showMainNav && (
-          <>
-            <Link onClick={() => setIsActive(!isActive)} href="/">Home</Link>
-            <Link onClick={() => setIsActive(!isActive)} href="/products">Products</Link>
-            <Link onClick={() => setIsActive(!isActive)} href="/about">How it Works</Link>
-            <Link onClick={() => setIsActive(!isActive)} href="/contact">Contact</Link>
-          </>
-        )}
+        {/* Main Navigation */}
+        <Link onClick={() => setIsActive(!isActive)} href="/">Home</Link>
+        <Link onClick={() => setIsActive(!isActive)} href="/products">Products</Link>
+        <Link onClick={() => setIsActive(!isActive)} href="/about">How it Works</Link>
+        <Link onClick={() => setIsActive(!isActive)} href="/contact">Contact</Link>
 
         {/* Seller Authenticated */}
         {isSellerAuthenticated && (
@@ -65,7 +58,7 @@ export default function MobileMenu() {
         )}
 
         {/* Regular User Authenticated */}
-        {isAuthenticated && showMainNav && (
+        {isAuthenticated && (
           <Link onClick={() => setIsActive(!isActive)} href="/account">
             <div className="flex items-center gap-2 font-semibold">
               <User className="w-5 h-5" />
