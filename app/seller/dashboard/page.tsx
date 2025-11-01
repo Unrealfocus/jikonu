@@ -201,7 +201,7 @@ export default function SellerDashboardPage() {
                   onClick={() => setActiveTab("overview")}
                   className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "overview"
                     ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
-                    : ""
+                    : "bg-white"
                     }`}
                 >
                   <TrendingUp className="w-5 h-5 mr-3" />
@@ -212,7 +212,7 @@ export default function SellerDashboardPage() {
                   onClick={() => setActiveTab("products")}
                   className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "products"
                     ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
-                    : ""
+                    : "bg-white"
                     }`}
                 >
                   <Package className="w-5 h-5 mr-3" />
@@ -223,7 +223,7 @@ export default function SellerDashboardPage() {
                   onClick={() => setActiveTab("orders")}
                   className={`flex items-center justify-between w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "orders"
                     ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
-                    : ""
+                    : "bg-white"
                     }`}
                 >
                   <div className="flex items-center">
@@ -241,7 +241,7 @@ export default function SellerDashboardPage() {
                   onClick={() => setActiveTab("analytics")}
                   className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "analytics"
                     ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
-                    : ""
+                    : "bg-white"
                     }`}
                 >
                   <BarChart3 className="w-5 h-5 mr-3" />
@@ -252,7 +252,7 @@ export default function SellerDashboardPage() {
                   onClick={() => setActiveTab("settings")}
                   className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "settings"
                     ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
-                    : ""
+                    : "bg-white"
                     }`}
                 >
                   <Settings className="w-5 h-5 mr-3" />

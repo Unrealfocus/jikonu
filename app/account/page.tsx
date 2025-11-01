@@ -123,7 +123,7 @@ export default function AccountPage() {
                   onClick={() => setActiveTab("overview")}
                   className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "overview"
                       ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
-                      : ""
+                      : "bg-white"
                     }`}
                 >
                   <User className="w-5 h-5 mr-3" />
@@ -134,7 +134,7 @@ export default function AccountPage() {
                   onClick={() => setActiveTab("orders")}
                   className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "orders"
                       ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
-                      : ""
+                      : "bg-white"
                     }`}
                 >
                   <Package className="w-5 h-5 mr-3" />
@@ -145,7 +145,7 @@ export default function AccountPage() {
                   onClick={() => setActiveTab("addresses")}
                   className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "addresses"
                       ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
-                      : ""
+                      : "bg-white"
                     }`}
                 >
                   <MapPin className="w-5 h-5 mr-3" />
@@ -156,7 +156,7 @@ export default function AccountPage() {
                   onClick={() => setActiveTab("settings")}
                   className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "settings"
                       ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
-                      : ""
+                      : "bg-white"
                     }`}
                 >
                   <Settings className="w-5 h-5 mr-3" />
