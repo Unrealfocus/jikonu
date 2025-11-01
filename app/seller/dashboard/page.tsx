@@ -142,7 +142,7 @@ export default function SellerDashboardPage() {
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-2">
               <Package className="w-8 h-8 text-blue-500" />
               <span className="text-2xl font-bold text-gray-900">{mockSellerStats.totalProducts}</span>
@@ -151,7 +151,7 @@ export default function SellerDashboardPage() {
             <p className="text-xs text-gray-500 mt-1">{mockSellerStats.activeProducts} active</p>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-2">
               <ShoppingBag className="w-8 h-8 text-orange-500" />
               <span className="text-2xl font-bold text-gray-900">{mockSellerStats.pendingOrders}</span>
@@ -160,7 +160,7 @@ export default function SellerDashboardPage() {
             <p className="text-xs text-gray-500 mt-1">{mockSellerStats.totalOrders} total</p>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-2">
               <DollarSign className="w-8 h-8 text-green-500" />
               <span className="text-2xl font-bold text-gray-900">${mockSellerStats.totalRevenue.toLocaleString()}</span>
@@ -169,7 +169,7 @@ export default function SellerDashboardPage() {
             <p className="text-xs text-green-600 mt-1">+${mockSellerStats.thisMonthRevenue} this month</p>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-2">
               <Star className="w-8 h-8 text-yellow-500" />
               <span className="text-2xl font-bold text-gray-900">{mockSellerStats.averageRating}</span>
@@ -179,81 +179,82 @@ export default function SellerDashboardPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Sidebar Navigation */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-sm p-4 sticky top-8">
-              <nav className="space-y-2">
-                <button
-                  onClick={() => setActiveTab("overview")}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                    activeTab === "overview"
-                      ? "bg-[#F29727] text-white"
-                      : "hover:bg-gray-100 text-gray-700"
-                  }`}
-                >
-                  <TrendingUp className="w-5 h-5" />
-                  <span className="font-semibold">Overview</span>
-                </button>
+        {/* Modern Horizontal Tab Navigation */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-2 mb-8">
+          <nav className="flex flex-wrap gap-2">
+            <button
+              onClick={() => setActiveTab("overview")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                activeTab === "overview"
+                  ? "bg-gradient-to-r from-[#F29727] to-orange-600 text-white shadow-lg shadow-orange-500/30"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+              }`}
+            >
+              <TrendingUp className="w-5 h-5" />
+              <span>Overview</span>
+            </button>
 
-                <button
-                  onClick={() => setActiveTab("products")}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                    activeTab === "products"
-                      ? "bg-[#F29727] text-white"
-                      : "hover:bg-gray-100 text-gray-700"
-                  }`}
-                >
-                  <Package className="w-5 h-5" />
-                  <span className="font-semibold">My Products</span>
-                </button>
+            <button
+              onClick={() => setActiveTab("products")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                activeTab === "products"
+                  ? "bg-gradient-to-r from-[#F29727] to-orange-600 text-white shadow-lg shadow-orange-500/30"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+              }`}
+            >
+              <Package className="w-5 h-5" />
+              <span>My Products</span>
+            </button>
 
-                <button
-                  onClick={() => setActiveTab("orders")}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                    activeTab === "orders"
-                      ? "bg-[#F29727] text-white"
-                      : "hover:bg-gray-100 text-gray-700"
-                  }`}
-                >
-                  <ShoppingBag className="w-5 h-5" />
-                  <span className="font-semibold">Orders</span>
-                  {pendingOrders.length > 0 && (
-                    <span className="ml-auto bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                      {pendingOrders.length}
-                    </span>
-                  )}
-                </button>
+            <button
+              onClick={() => setActiveTab("orders")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                activeTab === "orders"
+                  ? "bg-gradient-to-r from-[#F29727] to-orange-600 text-white shadow-lg shadow-orange-500/30"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+              }`}
+            >
+              <ShoppingBag className="w-5 h-5" />
+              <span>Orders</span>
+              {pendingOrders.length > 0 && (
+                <span className={`ml-1 px-2 py-0.5 rounded-full text-xs font-bold ${
+                  activeTab === "orders"
+                    ? "bg-white/20 text-white"
+                    : "bg-red-500 text-white"
+                }`}>
+                  {pendingOrders.length}
+                </span>
+              )}
+            </button>
 
-                <button
-                  onClick={() => setActiveTab("analytics")}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                    activeTab === "analytics"
-                      ? "bg-[#F29727] text-white"
-                      : "hover:bg-gray-100 text-gray-700"
-                  }`}
-                >
-                  <BarChart3 className="w-5 h-5" />
-                  <span className="font-semibold">Analytics</span>
-                </button>
+            <button
+              onClick={() => setActiveTab("analytics")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                activeTab === "analytics"
+                  ? "bg-gradient-to-r from-[#F29727] to-orange-600 text-white shadow-lg shadow-orange-500/30"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+              }`}
+            >
+              <BarChart3 className="w-5 h-5" />
+              <span>Analytics</span>
+            </button>
 
-                <button
-                  onClick={() => setActiveTab("settings")}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                    activeTab === "settings"
-                      ? "bg-[#F29727] text-white"
-                      : "hover:bg-gray-100 text-gray-700"
-                  }`}
-                >
-                  <Settings className="w-5 h-5" />
-                  <span className="font-semibold">Settings</span>
-                </button>
-              </nav>
-            </div>
-          </div>
+            <button
+              onClick={() => setActiveTab("settings")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                activeTab === "settings"
+                  ? "bg-gradient-to-r from-[#F29727] to-orange-600 text-white shadow-lg shadow-orange-500/30"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+              }`}
+            >
+              <Settings className="w-5 h-5" />
+              <span>Settings</span>
+            </button>
+          </nav>
+        </div>
 
-          {/* Main Content */}
-          <div className="lg:col-span-3">
+        {/* Main Content */}
+        <div>
             {/* Overview Tab */}
             {activeTab === "overview" && (
               <div className="space-y-6">
@@ -686,7 +687,6 @@ export default function SellerDashboardPage() {
                 </div>
               </div>
             )}
-          </div>
         </div>
 
         {/* Delete Confirmation Modal */}

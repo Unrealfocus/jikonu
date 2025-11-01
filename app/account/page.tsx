@@ -69,7 +69,7 @@ export default function AccountPage() {
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-2">
               <Package className="w-8 h-8 text-[#F29727]" />
               <span className="text-2xl font-bold text-gray-900">{activeOrders.length}</span>
@@ -77,7 +77,7 @@ export default function AccountPage() {
             <p className="text-gray-600 font-semibold">Active Orders</p>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-2">
               <TrendingUp className="w-8 h-8 text-green-500" />
               <span className="text-2xl font-bold text-gray-900">{completedOrders.length}</span>
@@ -85,7 +85,7 @@ export default function AccountPage() {
             <p className="text-gray-600 font-semibold">Completed Orders</p>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-2">
               <ShoppingBag className="w-8 h-8 text-blue-500" />
               <span className="text-2xl font-bold text-gray-900">{getCartCount()}</span>
@@ -93,7 +93,7 @@ export default function AccountPage() {
             <p className="text-gray-600 font-semibold">Cart Items</p>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-2">
               <Heart className="w-8 h-8 text-red-500" />
               <span className="text-2xl font-bold text-gray-900">0</span>
@@ -102,78 +102,61 @@ export default function AccountPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Sidebar Navigation */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-sm p-4">
-              <nav className="space-y-2">
-                <button
-                  onClick={() => setActiveTab("overview")}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                    activeTab === "overview"
-                      ? "bg-[#F29727] text-white"
-                      : "hover:bg-gray-100 text-gray-700"
-                  }`}
-                >
-                  <User className="w-5 h-5" />
-                  <span className="font-semibold">Overview</span>
-                </button>
+        {/* Modern Horizontal Tab Navigation */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-2 mb-8">
+          <nav className="flex flex-wrap gap-2">
+            <button
+              onClick={() => setActiveTab("overview")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                activeTab === "overview"
+                  ? "bg-gradient-to-r from-[#F29727] to-orange-600 text-white shadow-lg shadow-orange-500/30"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+              }`}
+            >
+              <User className="w-5 h-5" />
+              <span>Overview</span>
+            </button>
 
-                <button
-                  onClick={() => setActiveTab("orders")}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                    activeTab === "orders"
-                      ? "bg-[#F29727] text-white"
-                      : "hover:bg-gray-100 text-gray-700"
-                  }`}
-                >
-                  <Package className="w-5 h-5" />
-                  <span className="font-semibold">My Orders</span>
-                </button>
+            <button
+              onClick={() => setActiveTab("orders")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                activeTab === "orders"
+                  ? "bg-gradient-to-r from-[#F29727] to-orange-600 text-white shadow-lg shadow-orange-500/30"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+              }`}
+            >
+              <Package className="w-5 h-5" />
+              <span>My Orders</span>
+            </button>
 
-                <button
-                  onClick={() => setActiveTab("addresses")}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                    activeTab === "addresses"
-                      ? "bg-[#F29727] text-white"
-                      : "hover:bg-gray-100 text-gray-700"
-                  }`}
-                >
-                  <MapPin className="w-5 h-5" />
-                  <span className="font-semibold">Addresses</span>
-                </button>
+            <button
+              onClick={() => setActiveTab("addresses")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                activeTab === "addresses"
+                  ? "bg-gradient-to-r from-[#F29727] to-orange-600 text-white shadow-lg shadow-orange-500/30"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+              }`}
+            >
+              <MapPin className="w-5 h-5" />
+              <span>Addresses</span>
+            </button>
 
-                <button
-                  onClick={() => setActiveTab("settings")}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                    activeTab === "settings"
-                      ? "bg-[#F29727] text-white"
-                      : "hover:bg-gray-100 text-gray-700"
-                  }`}
-                >
-                  <Settings className="w-5 h-5" />
-                  <span className="font-semibold">Settings</span>
-                </button>
+            <button
+              onClick={() => setActiveTab("settings")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                activeTab === "settings"
+                  ? "bg-gradient-to-r from-[#F29727] to-orange-600 text-white shadow-lg shadow-orange-500/30"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+              }`}
+            >
+              <Settings className="w-5 h-5" />
+              <span>Settings</span>
+            </button>
+          </nav>
+        </div>
 
-                <Link href="/cart">
-                  <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors hover:bg-gray-100 text-gray-700">
-                    <ShoppingBag className="w-5 h-5" />
-                    <span className="font-semibold">Shopping Cart</span>
-                  </button>
-                </Link>
-
-                <Link href="/products">
-                  <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors hover:bg-gray-100 text-gray-700">
-                    <Heart className="w-5 h-5" />
-                    <span className="font-semibold">Wishlist</span>
-                  </button>
-                </Link>
-              </nav>
-            </div>
-          </div>
-
-          {/* Main Content */}
-          <div className="lg:col-span-3">
+        {/* Main Content */}
+        <div>
             {/* Overview Tab */}
             {activeTab === "overview" && (
               <div className="space-y-6">
@@ -466,7 +449,6 @@ export default function AccountPage() {
                 </div>
               </div>
             )}
-          </div>
         </div>
       </div>
     </div>

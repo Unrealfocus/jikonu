@@ -81,7 +81,7 @@ export default function InspectorDashboardPage() {
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-2">
               <ClipboardCheck className="w-8 h-8 text-blue-500" />
               <span className="text-2xl font-bold text-gray-900">
@@ -94,7 +94,7 @@ export default function InspectorDashboardPage() {
             </p>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-2">
               <Clock className="w-8 h-8 text-orange-500" />
               <span className="text-2xl font-bold text-gray-900">
@@ -107,7 +107,7 @@ export default function InspectorDashboardPage() {
             </p>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-2">
               <Star className="w-8 h-8 text-yellow-500" />
               <span className="text-2xl font-bold text-gray-900">
@@ -120,7 +120,7 @@ export default function InspectorDashboardPage() {
             </p>
           </div>
 
-          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
             <div className="flex items-center justify-between mb-2">
               <CheckCircle2 className="w-8 h-8 text-green-500" />
               <span className="text-2xl font-bold text-gray-900">
@@ -132,69 +132,70 @@ export default function InspectorDashboardPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Sidebar Navigation */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-sm p-4 sticky top-8">
-              <nav className="space-y-2">
-                <button
-                  onClick={() => setActiveTab("overview")}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                    activeTab === "overview"
-                      ? "bg-blue-600 text-white"
-                      : "hover:bg-gray-100 text-gray-700"
-                  }`}
-                >
-                  <TrendingUp className="w-5 h-5" />
-                  <span className="font-semibold">Overview</span>
-                </button>
+        {/* Modern Horizontal Tab Navigation */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-2 mb-8">
+          <nav className="flex flex-wrap gap-2">
+            <button
+              onClick={() => setActiveTab("overview")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                activeTab === "overview"
+                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/30"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+              }`}
+            >
+              <TrendingUp className="w-5 h-5" />
+              <span>Overview</span>
+            </button>
 
-                <button
-                  onClick={() => setActiveTab("assigned")}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                    activeTab === "assigned"
-                      ? "bg-blue-600 text-white"
-                      : "hover:bg-gray-100 text-gray-700"
-                  }`}
-                >
-                  <ClipboardCheck className="w-5 h-5" />
-                  <span className="font-semibold">My Inspections</span>
-                  {assignedInspections.length > 0 && (
-                    <span className="ml-auto bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                      {assignedInspections.length}
-                    </span>
-                  )}
-                </button>
+            <button
+              onClick={() => setActiveTab("assigned")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all relative ${
+                activeTab === "assigned"
+                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/30"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+              }`}
+            >
+              <ClipboardCheck className="w-5 h-5" />
+              <span>My Inspections</span>
+              {assignedInspections.length > 0 && (
+                <span className={`ml-1 px-2 py-0.5 rounded-full text-xs font-bold ${
+                  activeTab === "assigned"
+                    ? "bg-white/20 text-white"
+                    : "bg-orange-500 text-white"
+                }`}>
+                  {assignedInspections.length}
+                </span>
+              )}
+            </button>
 
-                <button
-                  onClick={() => setActiveTab("completed")}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                    activeTab === "completed"
-                      ? "bg-blue-600 text-white"
-                      : "hover:bg-gray-100 text-gray-700"
-                  }`}
-                >
-                  <CheckCircle2 className="w-5 h-5" />
-                  <span className="font-semibold">Completed</span>
-                </button>
+            <button
+              onClick={() => setActiveTab("completed")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                activeTab === "completed"
+                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/30"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+              }`}
+            >
+              <CheckCircle2 className="w-5 h-5" />
+              <span>Completed</span>
+            </button>
 
-                <button
-                  onClick={() => setActiveTab("settings")}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                    activeTab === "settings"
-                      ? "bg-blue-600 text-white"
-                      : "hover:bg-gray-100 text-gray-700"
-                  }`}
-                >
-                  <Settings className="w-5 h-5" />
-                  <span className="font-semibold">Settings</span>
-                </button>
-              </nav>
-            </div>
-          </div>
+            <button
+              onClick={() => setActiveTab("settings")}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
+                activeTab === "settings"
+                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/30"
+                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+              }`}
+            >
+              <Settings className="w-5 h-5" />
+              <span>Settings</span>
+            </button>
+          </nav>
+        </div>
 
-          {/* Main Content */}
-          <div className="lg:col-span-3">
+        {/* Main Content */}
+        <div>
             {/* Overview Tab */}
             {activeTab === "overview" && (
               <div className="space-y-6">
@@ -494,7 +495,6 @@ export default function InspectorDashboardPage() {
                 </div>
               </div>
             )}
-          </div>
         </div>
       </div>
     </div>
