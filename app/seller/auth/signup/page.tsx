@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useSellerAuth } from "@/context/SellerAuthContext";
 import Link from "next/link";
 import { Mail, Lock, User, Store, MapPin, Eye, EyeOff, Tag } from "lucide-react";
 
-export default function SellerSignupPage() {
+function SellerSignupForm() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -307,5 +307,32 @@ export default function SellerSignupPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function SellerSignupPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-orange-50 to-white flex items-center justify-center p-4">
+        <div className="max-w-2xl w-full text-center">
+          <div className="animate-pulse">
+            <div className="w-12 h-12 bg-[#F29727] rounded-lg mx-auto mb-4 flex items-center justify-center">
+              <Store className="w-6 h-6 text-white" />
+            </div>
+            <div className="h-8 bg-gray-200 rounded w-64 mx-auto mb-4"></div>
+            <div className="bg-white rounded-2xl shadow-xl p-8">
+              <div className="space-y-4">
+                <div className="h-12 bg-gray-200 rounded"></div>
+                <div className="h-12 bg-gray-200 rounded"></div>
+                <div className="h-12 bg-gray-200 rounded"></div>
+                <div className="h-12 bg-gray-200 rounded"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }>
+      <SellerSignupForm />
+    </Suspense>
   );
 }

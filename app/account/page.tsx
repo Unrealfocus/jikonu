@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
@@ -24,9 +24,23 @@ export default function AccountPage() {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<"overview" | "orders" | "addresses" | "settings">("overview");
 
+  // Handle authentication redirect in useEffect to avoid SSR issues
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/auth/login?redirect=/account");
+    }
+  }, [isAuthenticated, router]);
+
+  // Show loading state while redirecting
   if (!isAuthenticated) {
-    router.push("/auth/login?redirect=/account");
-    return null;
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F29727] mx-auto mb-4"></div>
+          <p className="text-gray-600">Redirecting to login...</p>
+        </div>
+      </div>
+    );
   }
 
   const handleLogout = () => {
