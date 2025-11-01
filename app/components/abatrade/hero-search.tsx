@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Search, Upload, ShieldCheck, Award, Globe } from "lucide-react";
 import SlideUp from "../animation/slideUp";
 
@@ -14,19 +15,29 @@ const popularTags = [
 ];
 
 export default function HeroSearch() {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
   const [imageFile, setImageFile] = useState<File | null>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setImageFile(e.target.files[0]);
+      // Redirect to products page with image search
+      router.push("/products?imageSearch=true");
     }
   };
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle search logic
-    console.log("Search:", searchQuery);
+    if (searchQuery.trim()) {
+      router.push(`/products?search=${encodeURIComponent(searchQuery)}`);
+    } else {
+      router.push("/products");
+    }
+  };
+
+  const handleTagClick = (tag: string) => {
+    router.push(`/products?search=${encodeURIComponent(tag)}`);
   };
 
   return (
@@ -86,6 +97,7 @@ export default function HeroSearch() {
               {popularTags.map((tag) => (
                 <button
                   key={tag}
+                  onClick={() => handleTagClick(tag)}
                   className="px-4 py-2 bg-white hover:bg-[#F29727] hover:text-white text-gray-700 rounded-full text-sm font-medium transition-all shadow-sm border border-gray-200"
                 >
                   {tag}

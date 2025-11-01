@@ -3,6 +3,8 @@ import { Rubik } from "next/font/google";
 import "./globals.css";
 import Header from "./components/header";
 import Footer from "./components/footer";
+import { CartProvider } from "@/context/CartContext";
+import { AuthProvider } from "@/context/AuthContext";
 
 
 const rubik = Rubik({
@@ -38,11 +40,15 @@ export default function RootLayout({
       <body
         className={`font-rubik`}
       >
-        <Header />
-        <div className="md:p-[20px] p-[0px]">
-          {children}
-        </div>
-        <Footer />
+        <AuthProvider>
+          <CartProvider>
+            <Header />
+            <div className="md:p-[20px] p-[0px]">
+              {children}
+            </div>
+            <Footer />
+          </CartProvider>
+        </AuthProvider>
       </body>
     </html>
   );
