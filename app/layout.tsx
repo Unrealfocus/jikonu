@@ -12,17 +12,17 @@ const rubik = Rubik({
 });
 
 export const metadata: Metadata = {
-  title: 'Jikonu - Digital Marketing, SEO & Web Development Services',
-  description: 'Grow your brand with Jikonu. We offer expert social media marketing, SEO, ads campaigns, and website development tailored to your goals. Expert Digital Marketing for Growth · Our Services · Social Media Marketing · SEO & Ads Campaigns · Website Building & Management · Why Thousands of. Businesses ...',
-  keywords: 'Jikonu,jikonu.com,jikonu, digital marketing, SEO services, social media marketing, website development, Google Ads, Facebook Ads, Instagram marketing ',
+  title: 'AbaTrade - Authentic Nigerian Artisans | Houston-Aba Marketplace',
+  description: 'Connect with verified Nigerian artisans from Aba. Trusted B2B/B2C marketplace featuring quality-assured handcrafted products, secure escrow payments, and end-to-end logistics from Nigeria to Houston, Texas.',
+  keywords: 'AbaTrade, Nigerian artisans, Aba marketplace, Houston Nigerian products, verified sellers, handcrafted goods, African marketplace, B2B marketplace, Nigerian leather goods, Aba craftsmanship, cross-border trade, Nigerian exports',
   openGraph: {
-    title: 'Jikonu Digital Services',
-    description: 'Expert services in social media marketing, SEO, ads, and web development. Expert Digital Marketing for Growth · Our Services · Social Media Marketing · SEO & Ads Campaigns · Website Building & Management · Why Thousands of. Businesses ...',
+    title: 'AbaTrade - Houston-Aba Pilot Marketplace',
+    description: 'Connecting authentic Nigerian artisans with Houston buyers through verified trust and quality. Shop handcrafted leather goods, textiles, accessories and more from Aba, Nigeria.',
     url: 'https://www.jikonu.com/',
     images: [
       {
-        url: '/assets/jikonu.svg',
-        alt: 'Jikonu Social Media Marketing',
+        url: '/assets/abatrade-og.jpg',
+        alt: 'AbaTrade Marketplace - Authentic Nigerian Craftsmanship',
       },
     ],
   },
