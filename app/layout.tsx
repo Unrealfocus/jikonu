@@ -5,6 +5,7 @@ import Header from "./components/header";
 import Footer from "./components/footer";
 import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
+import { SellerAuthProvider } from "@/context/SellerAuthContext";
 
 
 const rubik = Rubik({
@@ -41,13 +42,15 @@ export default function RootLayout({
         className={`font-rubik`}
       >
         <AuthProvider>
-          <CartProvider>
-            <Header />
-            <div className="md:p-[20px] p-[0px]">
-              {children}
-            </div>
-            <Footer />
-          </CartProvider>
+          <SellerAuthProvider>
+            <CartProvider>
+              <Header />
+              <div className="md:p-[20px] p-[0px]">
+                {children}
+              </div>
+              <Footer />
+            </CartProvider>
+          </SellerAuthProvider>
         </AuthProvider>
       </body>
     </html>

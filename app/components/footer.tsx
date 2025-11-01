@@ -9,9 +9,9 @@ export default function Footer() {
     <>
       <footer className="bg-gray-900 text-white">
         <div className="container mx-auto px-4 md:px-6 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
             {/* Brand Column */}
-            <div className="social-div">
+            <div className="social-div md:col-span-1">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-10 h-10 bg-[#F29727] rounded-lg flex items-center justify-center font-bold text-white text-xl">
                   A
@@ -32,10 +32,21 @@ export default function Footer() {
             <div>
               <h3 className="font-bold text-lg mb-4">Marketplace</h3>
               <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-[#F29727] transition-colors">Browse Products</a></li>
-                <li><a href="#" className="hover:text-[#F29727] transition-colors">Categories</a></li>
+                <li><a href="/products" className="hover:text-[#F29727] transition-colors">Browse Products</a></li>
+                <li><a href="/products" className="hover:text-[#F29727] transition-colors">Categories</a></li>
                 <li><a href="#" className="hover:text-[#F29727] transition-colors">Featured Artisans</a></li>
                 <li><a href="#" className="hover:text-[#F29727] transition-colors">Collections</a></li>
+              </ul>
+            </div>
+
+            {/* Sell on AbaTrade Column */}
+            <div>
+              <h3 className="font-bold text-lg mb-4">Sell on AbaTrade</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="/seller/auth/signup" className="hover:text-[#F29727] transition-colors">Become a Seller</a></li>
+                <li><a href="/seller/auth/login" className="hover:text-[#F29727] transition-colors">Seller Login</a></li>
+                <li><a href="/seller/dashboard" className="hover:text-[#F29727] transition-colors">Seller Dashboard</a></li>
+                <li><a href="#" className="hover:text-[#F29727] transition-colors">Seller Resources</a></li>
               </ul>
             </div>
 
@@ -57,7 +68,7 @@ export default function Footer() {
                 <li><a href="#" className="hover:text-[#F29727] transition-colors">How it Works</a></li>
                 <li><a href="#" className="hover:text-[#F29727] transition-colors">Seller Verification</a></li>
                 <li><a href="#" className="hover:text-[#F29727] transition-colors">Buyer Protection</a></li>
-                <li><a href="#" className="hover:text-[#F29727] transition-colors">Contact Us</a></li>
+                <li><a href="/contact" className="hover:text-[#F29727] transition-colors">Contact Us</a></li>
               </ul>
             </div>
           </div>
