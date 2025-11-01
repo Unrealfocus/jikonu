@@ -55,6 +55,7 @@ export default function Footer() {
               <h3 className="font-bold text-lg mb-4">Services</h3>
               <ul className="space-y-2 text-gray-400">
                 <li><a href="#" className="hover:text-[#F29727] transition-colors">AbaTrade Inspect™</a></li>
+                <li><a href="/inspector/auth/login" className="hover:text-[#F29727] transition-colors">Inspector Portal</a></li>
                 <li><a href="#" className="hover:text-[#F29727] transition-colors">Request for Quotation</a></li>
                 <li><a href="#" className="hover:text-[#F29727] transition-colors">Fast Customization</a></li>
                 <li><a href="#" className="hover:text-[#F29727] transition-colors">Logistics</a></li>

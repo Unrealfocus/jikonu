@@ -31,6 +31,7 @@ import {
 } from "@/lib/mock-seller-data";
 import { SellerProductCard } from "@/app/components/seller/SellerProductCard";
 import { DeleteConfirmationModal } from "@/app/components/seller/DeleteConfirmationModal";
+import { mockInspectionRequests } from "@/lib/mock-inspection-data";
 
 export default function SellerDashboardPage() {
   const { seller, isAuthenticated, logout } = useSellerAuth();
@@ -444,51 +445,159 @@ export default function SellerDashboardPage() {
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">Order Management</h2>
 
                 <div className="space-y-4">
-                  {mockSellerOrders.map((order) => (
-                    <div
-                      key={order.id}
-                      className="border border-gray-200 rounded-xl p-6"
-                    >
-                      <div className="flex justify-between items-start mb-4">
-                        <div>
-                          <p className="font-mono font-bold text-gray-900">{order.id}</p>
-                          <p className="text-sm text-gray-600">
-                            {order.createdAt.toLocaleDateString()} · {order.buyerName}
-                          </p>
-                        </div>
-                        <span
-                          className={`text-sm font-bold px-4 py-2 rounded-full ${getSellerOrderStatusColor(
-                            order.status
-                          )}`}
-                        >
-                          {getSellerOrderStatusLabel(order.status)}
-                        </span>
-                      </div>
+                  {mockSellerOrders.map((order) => {
+                    // Find associated inspection
+                    const inspection = mockInspectionRequests.find((i) => i.orderId === order.id);
+                    const hasInspection = order.items.some((item) => item.includeInspect);
+                    const inspectionPassed = inspection?.report?.overallStatus === "pass";
+                    const inspectionCompleted = inspection?.status === "completed" || inspection?.status === "approved";
+                    const fundsLocked = hasInspection && !inspectionCompleted;
 
-                      <div className="mb-4">
-                        {order.items.map((item, idx) => (
-                          <div key={idx} className="text-sm text-gray-700">
-                            {item.productName} × {item.quantity} = ${item.price * item.quantity}
-                            {item.includeInspect && (
-                              <span className="text-purple-600 ml-2">(Inspection Requested)</span>
+                    return (
+                      <div
+                        key={order.id}
+                        className="border border-gray-200 rounded-xl p-6 hover:border-[#F29727] transition-colors"
+                      >
+                        <div className="flex justify-between items-start mb-4">
+                          <div>
+                            <p className="font-mono font-bold text-gray-900">{order.id}</p>
+                            <p className="text-sm text-gray-600">
+                              {order.createdAt.toLocaleDateString()} · {order.buyerName}
+                            </p>
+                          </div>
+                          <span
+                            className={`text-sm font-bold px-4 py-2 rounded-full ${getSellerOrderStatusColor(
+                              order.status
+                            )}`}
+                          >
+                            {getSellerOrderStatusLabel(order.status)}
+                          </span>
+                        </div>
+
+                        <div className="mb-4">
+                          {order.items.map((item, idx) => (
+                            <div key={idx} className="text-sm text-gray-700 flex items-center justify-between">
+                              <span>
+                                {item.productName} × {item.quantity} = ${item.price * item.quantity}
+                                {item.includeInspect && (
+                                  <span className="text-purple-600 ml-2 text-xs font-semibold">
+                                    (Inspection Required)
+                                  </span>
+                                )}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Escrow Status */}
+                        {hasInspection && (
+                          <div className={`mb-4 p-4 rounded-lg border-2 ${
+                            fundsLocked
+                              ? "bg-yellow-50 border-yellow-300"
+                              : inspectionPassed
+                              ? "bg-green-50 border-green-300"
+                              : "bg-red-50 border-red-300"
+                          }`}>
+                            <div className="flex items-start gap-3">
+                              <Shield className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
+                                fundsLocked
+                                  ? "text-yellow-600"
+                                  : inspectionPassed
+                                  ? "text-green-600"
+                                  : "text-red-600"
+                              }`} />
+                              <div className="flex-1">
+                                <h4 className={`font-bold text-sm mb-1 ${
+                                  fundsLocked
+                                    ? "text-yellow-900"
+                                    : inspectionPassed
+                                    ? "text-green-900"
+                                    : "text-red-900"
+                                }`}>
+                                  {fundsLocked && "🔒 Payment Held in Escrow"}
+                                  {!fundsLocked && inspectionPassed && "✅ Inspection Passed - Funds Releasing"}
+                                  {!fundsLocked && !inspectionPassed && "⚠️ Inspection Issues Detected"}
+                                </h4>
+                                <p className={`text-xs ${
+                                  fundsLocked
+                                    ? "text-yellow-800"
+                                    : inspectionPassed
+                                    ? "text-green-800"
+                                    : "text-red-800"
+                                }`}>
+                                  {fundsLocked && (
+                                    <>
+                                      Buyer's payment (${order.subtotal}) is secured in escrow.
+                                      Funds will be released to you once inspection passes or buyer approves override.
+                                      {inspection?.scheduledDate && (
+                                        <span className="block mt-1">
+                                          Inspection scheduled: {inspection.scheduledDate.toLocaleDateString()}
+                                        </span>
+                                      )}
+                                    </>
+                                  )}
+                                  {!fundsLocked && inspectionPassed && (
+                                    <>
+                                      Quality inspection passed with score {inspection?.report?.qualityScore}/100.
+                                      Funds will be released to your account within 2-3 business days after shipment confirmation.
+                                    </>
+                                  )}
+                                  {!fundsLocked && !inspectionPassed && inspection?.report && (
+                                    <>
+                                      Inspection status: {inspection.report.overallStatus.replace("_", " ").toUpperCase()}.
+                                      Awaiting buyer decision to proceed or refund.
+                                    </>
+                                  )}
+                                </p>
+                                {inspectionCompleted && inspection?.report && (
+                                  <div className="mt-2 flex gap-3 text-xs">
+                                    <span className={fundsLocked ? "text-yellow-700" : inspectionPassed ? "text-green-700" : "text-red-700"}>
+                                      Passed: {inspection.report.passedChecks}/{inspection.report.totalChecks}
+                                    </span>
+                                    <span className={fundsLocked ? "text-yellow-700" : inspectionPassed ? "text-green-700" : "text-red-700"}>
+                                      Score: {inspection.report.qualityScore}/100
+                                    </span>
+                                  </div>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Order Total and Actions */}
+                        <div className="flex justify-between items-center pt-4 border-t border-gray-200">
+                          <div>
+                            <span className="font-bold text-lg text-gray-900">Total: ${order.subtotal}</span>
+                            {hasInspection && fundsLocked && (
+                              <span className="block text-xs text-yellow-600 font-semibold mt-1">
+                                ⏳ Pending Inspection Approval
+                              </span>
+                            )}
+                            {hasInspection && !fundsLocked && inspectionPassed && (
+                              <span className="block text-xs text-green-600 font-semibold mt-1">
+                                ✓ Ready to Ship & Release Funds
+                              </span>
                             )}
                           </div>
-                        ))}
-                      </div>
-
-                      <div className="flex justify-between items-center pt-4 border-t border-gray-200">
-                        <span className="font-bold text-lg">Total: ${order.subtotal}</span>
-                        <div className="flex gap-2">
-                          <button className="bg-[#F29727] hover:bg-[#d97f0f] text-white font-bold px-4 py-2 rounded-lg transition-colors text-sm">
-                            Process Order
-                          </button>
-                          <button className="bg-white hover:bg-gray-50 text-gray-900 font-bold px-4 py-2 rounded-lg border-2 border-gray-300 transition-colors text-sm">
-                            View Details
-                          </button>
+                          <div className="flex gap-2">
+                            {inspectionCompleted && inspectionPassed && (
+                              <button className="bg-green-600 hover:bg-green-700 text-white font-bold px-4 py-2 rounded-lg transition-colors text-sm">
+                                Ship Order
+                              </button>
+                            )}
+                            {!inspectionCompleted && (
+                              <button className="bg-gray-400 text-white font-bold px-4 py-2 rounded-lg cursor-not-allowed text-sm" disabled>
+                                Awaiting Inspection
+                              </button>
+                            )}
+                            <button className="bg-white hover:bg-gray-50 text-gray-900 font-bold px-4 py-2 rounded-lg border-2 border-gray-300 transition-colors text-sm">
+                              View Details
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             )}
