@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useSellerAuth } from "@/context/SellerAuthContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -19,6 +19,8 @@ import {
   Star,
   Clock,
   CheckCircle2,
+  Search,
+  Filter,
 } from "lucide-react";
 import {
   mockSellerProducts,
@@ -27,11 +29,26 @@ import {
   getSellerOrderStatusLabel,
   getSellerOrderStatusColor,
 } from "@/lib/mock-seller-data";
+import { SellerProductCard } from "@/app/components/seller/SellerProductCard";
+import { DeleteConfirmationModal } from "@/app/components/seller/DeleteConfirmationModal";
 
 export default function SellerDashboardPage() {
   const { seller, isAuthenticated, logout } = useSellerAuth();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState<"overview" | "products" | "orders" | "analytics" | "settings">("overview");
+
+  // Product filters and search
+  const [searchQuery, setSearchQuery] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState<string>("all");
+  const [statusFilter, setStatusFilter] = useState<string>("all");
+  const [priceRangeFilter, setPriceRangeFilter] = useState<string>("all");
+
+  // Delete modal
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [productToDelete, setProductToDelete] = useState<{ id: string; name: string } | null>(null);
+
+  // Products state (in real app, would fetch from API)
+  const [products, setProducts] = useState(mockSellerProducts);
 
   if (!isAuthenticated) {
     router.push("/seller/auth/login?redirect=/seller/dashboard");
@@ -42,6 +59,56 @@ export default function SellerDashboardPage() {
     logout();
     router.push("/");
   };
+
+  const handleDeleteProduct = (productId: string) => {
+    const product = products.find((p) => p.id === productId);
+    if (product) {
+      setProductToDelete({ id: product.id, name: product.name });
+      setDeleteModalOpen(true);
+    }
+  };
+
+  const confirmDelete = () => {
+    if (productToDelete) {
+      setProducts(products.filter((p) => p.id !== productToDelete.id));
+      setProductToDelete(null);
+    }
+  };
+
+  // Get unique categories for filter
+  const categories = Array.from(new Set(mockSellerProducts.map((p) => p.category)));
+
+  // Filter products based on search and filters
+  const filteredProducts = useMemo(() => {
+    return products.filter((product) => {
+      // Search filter
+      const matchesSearch =
+        searchQuery === "" ||
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.category.toLowerCase().includes(searchQuery.toLowerCase());
+
+      // Category filter
+      const matchesCategory = categoryFilter === "all" || product.category === categoryFilter;
+
+      // Status filter
+      const matchesStatus = statusFilter === "all" || product.status === statusFilter;
+
+      // Price range filter
+      let matchesPrice = true;
+      if (priceRangeFilter === "0-50") {
+        matchesPrice = product.price < 50;
+      } else if (priceRangeFilter === "50-100") {
+        matchesPrice = product.price >= 50 && product.price < 100;
+      } else if (priceRangeFilter === "100-200") {
+        matchesPrice = product.price >= 100 && product.price < 200;
+      } else if (priceRangeFilter === "200+") {
+        matchesPrice = product.price >= 200;
+      }
+
+      return matchesSearch && matchesCategory && matchesStatus && matchesPrice;
+    });
+  }, [products, searchQuery, categoryFilter, statusFilter, priceRangeFilter]);
 
   const pendingOrders = mockSellerOrders.filter((o) => o.status === "pending" || o.status === "preparing");
 
@@ -250,74 +317,124 @@ export default function SellerDashboardPage() {
 
             {/* Products Tab */}
             {activeTab === "products" && (
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-gray-900">My Products</h2>
-                  <button className="flex items-center gap-2 bg-[#F29727] hover:bg-[#d97f0f] text-white font-bold px-6 py-3 rounded-xl transition-colors">
-                    <Plus className="w-5 h-5" />
-                    Add Product
-                  </button>
-                </div>
-
-                <div className="space-y-4">
-                  {mockSellerProducts.map((product) => (
-                    <div
-                      key={product.id}
-                      className="border border-gray-200 rounded-xl p-6"
-                    >
-                      <div className="flex gap-6">
-                        <div className="w-24 h-24 bg-gradient-to-br from-orange-200 to-orange-300 rounded-xl flex items-center justify-center flex-shrink-0">
-                          <span className="text-white/30 text-3xl font-bold">
-                            {product.category.substring(0, 2).toUpperCase()}
-                          </span>
-                        </div>
-
-                        <div className="flex-1">
-                          <div className="flex justify-between items-start mb-2">
-                            <div>
-                              <h3 className="text-xl font-bold text-gray-900">{product.name}</h3>
-                              <p className="text-sm text-gray-600">{product.category}</p>
-                            </div>
-                            <span
-                              className={`text-sm font-bold px-3 py-1 rounded-full ${
-                                product.status === "active"
-                                  ? "bg-green-100 text-green-700"
-                                  : product.status === "draft"
-                                  ? "bg-gray-100 text-gray-700"
-                                  : "bg-red-100 text-red-700"
-                              }`}
-                            >
-                              {product.status.replace("_", " ").toUpperCase()}
-                            </span>
-                          </div>
-
-                          <p className="text-gray-600 mb-4 line-clamp-2">{product.description}</p>
-
-                          <div className="flex items-center gap-6 text-sm text-gray-600 mb-4">
-                            <span className="font-bold text-lg text-[#F29727]">${product.price}</span>
-                            <span>Stock: {product.stockQuantity}</span>
-                            <span>Min Order: {product.minimumOrder}</span>
-                          </div>
-
-                          <div className="flex gap-3">
-                            <button className="flex items-center gap-2 text-sm font-semibold text-[#F29727] hover:underline">
-                              <Edit className="w-4 h-4" />
-                              Edit
-                            </button>
-                            <button className="flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-gray-900">
-                              <Eye className="w-4 h-4" />
-                              View
-                            </button>
-                            <button className="flex items-center gap-2 text-sm font-semibold text-red-600 hover:text-red-700">
-                              <Trash2 className="w-4 h-4" />
-                              Delete
-                            </button>
-                          </div>
-                        </div>
-                      </div>
+              <div className="space-y-6">
+                {/* Header with Add Button */}
+                <div className="bg-white rounded-xl shadow-sm p-6">
+                  <div className="flex items-center justify-between mb-6">
+                    <div>
+                      <h2 className="text-2xl font-bold text-gray-900">My Products</h2>
+                      <p className="text-sm text-gray-600 mt-1">
+                        {filteredProducts.length} of {products.length} products
+                      </p>
                     </div>
-                  ))}
+                    <Link href="/seller/products/add">
+                      <button className="flex items-center gap-2 bg-[#F29727] hover:bg-[#d97f0f] text-white font-bold px-6 py-3 rounded-xl transition-colors">
+                        <Plus className="w-5 h-5" />
+                        Add Product
+                      </button>
+                    </Link>
+                  </div>
+
+                  {/* Search Bar */}
+                  <div className="relative mb-4">
+                    <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                    <input
+                      type="text"
+                      placeholder="Search products by name, description, or category..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#F29727] focus:border-transparent"
+                    />
+                  </div>
+
+                  {/* Filters */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {/* Category Filter */}
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Category
+                      </label>
+                      <select
+                        value={categoryFilter}
+                        onChange={(e) => setCategoryFilter(e.target.value)}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F29727]"
+                      >
+                        <option value="all">All Categories</option>
+                        {categories.map((category) => (
+                          <option key={category} value={category}>
+                            {category}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {/* Status Filter */}
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Status
+                      </label>
+                      <select
+                        value={statusFilter}
+                        onChange={(e) => setStatusFilter(e.target.value)}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F29727]"
+                      >
+                        <option value="all">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="draft">Draft</option>
+                        <option value="out_of_stock">Out of Stock</option>
+                      </select>
+                    </div>
+
+                    {/* Price Range Filter */}
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Price Range
+                      </label>
+                      <select
+                        value={priceRangeFilter}
+                        onChange={(e) => setPriceRangeFilter(e.target.value)}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F29727]"
+                      >
+                        <option value="all">All Prices</option>
+                        <option value="0-50">Under $50</option>
+                        <option value="50-100">$50 - $100</option>
+                        <option value="100-200">$100 - $200</option>
+                        <option value="200+">$200+</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
+
+                {/* Products Grid */}
+                {filteredProducts.length === 0 ? (
+                  <div className="bg-white rounded-xl shadow-sm p-12 text-center">
+                    <Package className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">No products found</h3>
+                    <p className="text-gray-600 mb-6">
+                      {searchQuery || categoryFilter !== "all" || statusFilter !== "all" || priceRangeFilter !== "all"
+                        ? "Try adjusting your search or filters"
+                        : "Start by adding your first product"}
+                    </p>
+                    {products.length === 0 && (
+                      <Link href="/seller/products/add">
+                        <button className="inline-flex items-center gap-2 bg-[#F29727] hover:bg-[#d97f0f] text-white font-bold px-6 py-3 rounded-xl transition-colors">
+                          <Plus className="w-5 h-5" />
+                          Add Your First Product
+                        </button>
+                      </Link>
+                    )}
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredProducts.map((product) => (
+                      <SellerProductCard
+                        key={product.id}
+                        product={product}
+                        onDelete={handleDeleteProduct}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
             )}
 
@@ -462,6 +579,14 @@ export default function SellerDashboardPage() {
             )}
           </div>
         </div>
+
+        {/* Delete Confirmation Modal */}
+        <DeleteConfirmationModal
+          isOpen={deleteModalOpen}
+          onClose={() => setDeleteModalOpen(false)}
+          onConfirm={confirmDelete}
+          productName={productToDelete?.name || ""}
+        />
       </div>
     </div>
   );
