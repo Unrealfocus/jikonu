@@ -121,11 +121,10 @@ export default function AccountPage() {
               <nav className="py-2">
                 <button
                   onClick={() => setActiveTab("overview")}
-                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${
-                    activeTab === "overview"
+                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "overview"
                       ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
                       : ""
-                  }`}
+                    }`}
                 >
                   <User className="w-5 h-5 mr-3" />
                   <span className="font-medium">Overview</span>
@@ -133,11 +132,10 @@ export default function AccountPage() {
 
                 <button
                   onClick={() => setActiveTab("orders")}
-                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${
-                    activeTab === "orders"
+                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "orders"
                       ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
                       : ""
-                  }`}
+                    }`}
                 >
                   <Package className="w-5 h-5 mr-3" />
                   <span className="font-medium">My Orders</span>
@@ -145,11 +143,10 @@ export default function AccountPage() {
 
                 <button
                   onClick={() => setActiveTab("addresses")}
-                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${
-                    activeTab === "addresses"
+                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "addresses"
                       ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
                       : ""
-                  }`}
+                    }`}
                 >
                   <MapPin className="w-5 h-5 mr-3" />
                   <span className="font-medium">Addresses</span>
@@ -157,11 +154,10 @@ export default function AccountPage() {
 
                 <button
                   onClick={() => setActiveTab("settings")}
-                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${
-                    activeTab === "settings"
+                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "settings"
                       ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
                       : ""
-                  }`}
+                    }`}
                 >
                   <Settings className="w-5 h-5 mr-3" />
                   <span className="font-medium">Settings</span>
@@ -464,6 +460,7 @@ export default function AccountPage() {
                 </div>
               </div>
             )}
+          </div>
         </div>
       </div>
     </div>

@@ -21,6 +21,7 @@ import {
   CheckCircle2,
   Search,
   Filter,
+  Shield,
 } from "lucide-react";
 import {
   mockSellerProducts,
@@ -198,11 +199,10 @@ export default function SellerDashboardPage() {
               <nav className="py-2">
                 <button
                   onClick={() => setActiveTab("overview")}
-                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${
-                    activeTab === "overview"
-                      ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
-                      : ""
-                  }`}
+                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "overview"
+                    ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
+                    : ""
+                    }`}
                 >
                   <TrendingUp className="w-5 h-5 mr-3" />
                   <span className="font-medium">Overview</span>
@@ -210,11 +210,10 @@ export default function SellerDashboardPage() {
 
                 <button
                   onClick={() => setActiveTab("products")}
-                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${
-                    activeTab === "products"
-                      ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
-                      : ""
-                  }`}
+                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "products"
+                    ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
+                    : ""
+                    }`}
                 >
                   <Package className="w-5 h-5 mr-3" />
                   <span className="font-medium">My Products</span>
@@ -222,11 +221,10 @@ export default function SellerDashboardPage() {
 
                 <button
                   onClick={() => setActiveTab("orders")}
-                  className={`flex items-center justify-between w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${
-                    activeTab === "orders"
-                      ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
-                      : ""
-                  }`}
+                  className={`flex items-center justify-between w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "orders"
+                    ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
+                    : ""
+                    }`}
                 >
                   <div className="flex items-center">
                     <ShoppingBag className="w-5 h-5 mr-3" />
@@ -241,11 +239,10 @@ export default function SellerDashboardPage() {
 
                 <button
                   onClick={() => setActiveTab("analytics")}
-                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${
-                    activeTab === "analytics"
-                      ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
-                      : ""
-                  }`}
+                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "analytics"
+                    ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
+                    : ""
+                    }`}
                 >
                   <BarChart3 className="w-5 h-5 mr-3" />
                   <span className="font-medium">Analytics</span>
@@ -253,11 +250,10 @@ export default function SellerDashboardPage() {
 
                 <button
                   onClick={() => setActiveTab("settings")}
-                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${
-                    activeTab === "settings"
-                      ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
-                      : ""
-                  }`}
+                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "settings"
+                    ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
+                    : ""
+                    }`}
                 >
                   <Settings className="w-5 h-5 mr-3" />
                   <span className="font-medium">Settings</span>
@@ -505,40 +501,36 @@ export default function SellerDashboardPage() {
 
                         {/* Escrow Status */}
                         {hasInspection && (
-                          <div className={`mb-4 p-4 rounded-lg border-2 ${
-                            fundsLocked
-                              ? "bg-yellow-50 border-yellow-300"
-                              : inspectionPassed
+                          <div className={`mb-4 p-4 rounded-lg border-2 ${fundsLocked
+                            ? "bg-yellow-50 border-yellow-300"
+                            : inspectionPassed
                               ? "bg-green-50 border-green-300"
                               : "bg-red-50 border-red-300"
-                          }`}>
+                            }`}>
                             <div className="flex items-start gap-3">
-                              <Shield className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
-                                fundsLocked
-                                  ? "text-yellow-600"
-                                  : inspectionPassed
+                              <Shield className={`w-5 h-5 flex-shrink-0 mt-0.5 ${fundsLocked
+                                ? "text-yellow-600"
+                                : inspectionPassed
                                   ? "text-green-600"
                                   : "text-red-600"
-                              }`} />
+                                }`} />
                               <div className="flex-1">
-                                <h4 className={`font-bold text-sm mb-1 ${
-                                  fundsLocked
-                                    ? "text-yellow-900"
-                                    : inspectionPassed
+                                <h4 className={`font-bold text-sm mb-1 ${fundsLocked
+                                  ? "text-yellow-900"
+                                  : inspectionPassed
                                     ? "text-green-900"
                                     : "text-red-900"
-                                }`}>
+                                  }`}>
                                   {fundsLocked && "🔒 Payment Held in Escrow"}
                                   {!fundsLocked && inspectionPassed && "✅ Inspection Passed - Funds Releasing"}
                                   {!fundsLocked && !inspectionPassed && "⚠️ Inspection Issues Detected"}
                                 </h4>
-                                <p className={`text-xs ${
-                                  fundsLocked
-                                    ? "text-yellow-800"
-                                    : inspectionPassed
+                                <p className={`text-xs ${fundsLocked
+                                  ? "text-yellow-800"
+                                  : inspectionPassed
                                     ? "text-green-800"
                                     : "text-red-800"
-                                }`}>
+                                  }`}>
                                   {fundsLocked && (
                                     <>
                                       Buyer's payment (${order.subtotal}) is secured in escrow.
@@ -700,15 +692,16 @@ export default function SellerDashboardPage() {
                 </div>
               </div>
             )}
-        </div>
+          </div>
 
-        {/* Delete Confirmation Modal */}
-        <DeleteConfirmationModal
-          isOpen={deleteModalOpen}
-          onClose={() => setDeleteModalOpen(false)}
-          onConfirm={confirmDelete}
-          productName={productToDelete?.name || ""}
-        />
+          {/* Delete Confirmation Modal */}
+          <DeleteConfirmationModal
+            isOpen={deleteModalOpen}
+            onClose={() => setDeleteModalOpen(false)}
+            onConfirm={confirmDelete}
+            productName={productToDelete?.name || ""}
+          />
+        </div>
       </div>
     </div>
   );

@@ -151,11 +151,10 @@ export default function InspectorDashboardPage() {
               <nav className="py-2">
                 <button
                   onClick={() => setActiveTab("overview")}
-                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${
-                    activeTab === "overview"
-                      ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
-                      : ""
-                  }`}
+                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "overview"
+                    ? " text-[#F29727] border-r-4 border-[#F29727]"
+                    : ""
+                    }`}
                 >
                   <TrendingUp className="w-5 h-5 mr-3" />
                   <span className="font-medium">Overview</span>
@@ -163,11 +162,10 @@ export default function InspectorDashboardPage() {
 
                 <button
                   onClick={() => setActiveTab("assigned")}
-                  className={`flex items-center justify-between w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${
-                    activeTab === "assigned"
-                      ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
-                      : ""
-                  }`}
+                  className={`flex items-center justify-between w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "assigned"
+                    ? " text-[#F29727] border-r-4 border-[#F29727]"
+                    : ""
+                    }`}
                 >
                   <div className="flex items-center">
                     <ClipboardCheck className="w-5 h-5 mr-3" />
@@ -182,11 +180,10 @@ export default function InspectorDashboardPage() {
 
                 <button
                   onClick={() => setActiveTab("completed")}
-                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${
-                    activeTab === "completed"
-                      ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
-                      : ""
-                  }`}
+                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "completed"
+                    ? " text-[#F29727] border-r-4 border-[#F29727]"
+                    : ""
+                    }`}
                 >
                   <CheckCircle2 className="w-5 h-5 mr-3" />
                   <span className="font-medium">Completed</span>
@@ -194,11 +191,10 @@ export default function InspectorDashboardPage() {
 
                 <button
                   onClick={() => setActiveTab("settings")}
-                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${
-                    activeTab === "settings"
-                      ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
-                      : ""
-                  }`}
+                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${activeTab === "settings"
+                    ? " text-[#F29727] border-r-4 border-[#F29727]"
+                    : ""
+                    }`}
                 >
                   <Settings className="w-5 h-5 mr-3" />
                   <span className="font-medium">Settings</span>
@@ -400,13 +396,12 @@ export default function InspectorDashboardPage() {
                         </div>
                         {inspection.report && (
                           <span
-                            className={`text-sm font-bold px-4 py-2 rounded-full ${
-                              inspection.report.overallStatus === "pass"
-                                ? "bg-green-100 text-green-700"
-                                : inspection.report.overallStatus === "conditional_pass"
+                            className={`text-sm font-bold px-4 py-2 rounded-full ${inspection.report.overallStatus === "pass"
+                              ? "bg-green-100 text-green-700"
+                              : inspection.report.overallStatus === "conditional_pass"
                                 ? "bg-yellow-100 text-yellow-700"
                                 : "bg-red-100 text-red-700"
-                            }`}
+                              }`}
                           >
                             {inspection.report.overallStatus.replace("_", " ").toUpperCase()}
                           </span>
@@ -508,6 +503,7 @@ export default function InspectorDashboardPage() {
                 </div>
               </div>
             )}
+          </div>
         </div>
       </div>
     </div>
