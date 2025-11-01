@@ -132,70 +132,83 @@ export default function InspectorDashboardPage() {
           </div>
         </div>
 
-        {/* Modern Horizontal Tab Navigation */}
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-2 mb-8">
-          <nav className="flex flex-wrap gap-2">
-            <button
-              onClick={() => setActiveTab("overview")}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
-                activeTab === "overview"
-                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/30"
-                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-              }`}
-            >
-              <TrendingUp className="w-5 h-5" />
-              <span>Overview</span>
-            </button>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          {/* Modern Sidebar Navigation */}
+          <div className="lg:col-span-1">
+            <div className="bg-white rounded-2xl shadow-sm overflow-hidden sticky top-8">
+              <div className="p-6 bg-gradient-to-r from-blue-600 to-purple-600">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                    <Shield className="w-6 h-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-white font-bold">Inspector Portal</h3>
+                    <p className="text-blue-100 text-xs">Quality Assurance</p>
+                  </div>
+                </div>
+              </div>
 
-            <button
-              onClick={() => setActiveTab("assigned")}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all relative ${
-                activeTab === "assigned"
-                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/30"
-                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-              }`}
-            >
-              <ClipboardCheck className="w-5 h-5" />
-              <span>My Inspections</span>
-              {assignedInspections.length > 0 && (
-                <span className={`ml-1 px-2 py-0.5 rounded-full text-xs font-bold ${
-                  activeTab === "assigned"
-                    ? "bg-white/20 text-white"
-                    : "bg-orange-500 text-white"
-                }`}>
-                  {assignedInspections.length}
-                </span>
-              )}
-            </button>
+              <nav className="py-2">
+                <button
+                  onClick={() => setActiveTab("overview")}
+                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${
+                    activeTab === "overview"
+                      ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
+                      : ""
+                  }`}
+                >
+                  <TrendingUp className="w-5 h-5 mr-3" />
+                  <span className="font-medium">Overview</span>
+                </button>
 
-            <button
-              onClick={() => setActiveTab("completed")}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
-                activeTab === "completed"
-                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/30"
-                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-              }`}
-            >
-              <CheckCircle2 className="w-5 h-5" />
-              <span>Completed</span>
-            </button>
+                <button
+                  onClick={() => setActiveTab("assigned")}
+                  className={`flex items-center justify-between w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${
+                    activeTab === "assigned"
+                      ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
+                      : ""
+                  }`}
+                >
+                  <div className="flex items-center">
+                    <ClipboardCheck className="w-5 h-5 mr-3" />
+                    <span className="font-medium">My Inspections</span>
+                  </div>
+                  {assignedInspections.length > 0 && (
+                    <span className="bg-[#F29727] text-white text-xs font-bold px-2 py-1 rounded-full">
+                      {assignedInspections.length}
+                    </span>
+                  )}
+                </button>
 
-            <button
-              onClick={() => setActiveTab("settings")}
-              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all ${
-                activeTab === "settings"
-                  ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg shadow-blue-500/30"
-                  : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-              }`}
-            >
-              <Settings className="w-5 h-5" />
-              <span>Settings</span>
-            </button>
-          </nav>
-        </div>
+                <button
+                  onClick={() => setActiveTab("completed")}
+                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${
+                    activeTab === "completed"
+                      ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
+                      : ""
+                  }`}
+                >
+                  <CheckCircle2 className="w-5 h-5 mr-3" />
+                  <span className="font-medium">Completed</span>
+                </button>
 
-        {/* Main Content */}
-        <div>
+                <button
+                  onClick={() => setActiveTab("settings")}
+                  className={`flex items-center w-full px-6 py-3 text-gray-700 hover:bg-orange-50 hover:text-[#F29727] transition-colors ${
+                    activeTab === "settings"
+                      ? "bg-orange-50 text-[#F29727] border-r-4 border-[#F29727]"
+                      : ""
+                  }`}
+                >
+                  <Settings className="w-5 h-5 mr-3" />
+                  <span className="font-medium">Settings</span>
+                </button>
+              </nav>
+            </div>
+          </div>
+
+          {/* Main Content */}
+          <div className="lg:col-span-3">
             {/* Overview Tab */}
             {activeTab === "overview" && (
               <div className="space-y-6">
