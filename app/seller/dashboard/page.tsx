@@ -52,45 +52,6 @@ export default function SellerDashboardPage() {
   // Products state (in real app, would fetch from API)
   const [products, setProducts] = useState(mockSellerProducts);
 
-  // Handle authentication redirect in useEffect to avoid SSR and render issues
-  useEffect(() => {
-    if (!isAuthenticated) {
-      router.push("/seller/auth/login?redirect=/seller/dashboard");
-    }
-  }, [isAuthenticated, router]);
-
-  // Show loading state while redirecting
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F29727] mx-auto mb-4"></div>
-          <p className="text-gray-600">Redirecting to login...</p>
-        </div>
-      </div>
-    );
-  }
-
-  const handleLogout = () => {
-    logout();
-    router.push("/");
-  };
-
-  const handleDeleteProduct = (productId: string) => {
-    const product = products.find((p) => p.id === productId);
-    if (product) {
-      setProductToDelete({ id: product.id, name: product.name });
-      setDeleteModalOpen(true);
-    }
-  };
-
-  const confirmDelete = () => {
-    if (productToDelete) {
-      setProducts(products.filter((p) => p.id !== productToDelete.id));
-      setProductToDelete(null);
-    }
-  };
-
   // Get unique categories for filter
   const categories = Array.from(new Set(mockSellerProducts.map((p) => p.category)));
 
@@ -127,6 +88,46 @@ export default function SellerDashboardPage() {
   }, [products, searchQuery, categoryFilter, statusFilter, priceRangeFilter]);
 
   const pendingOrders = mockSellerOrders.filter((o) => o.status === "pending" || o.status === "preparing");
+
+  // Event handlers - defined before any early returns
+  const handleLogout = () => {
+    logout();
+    router.push("/");
+  };
+
+  const handleDeleteProduct = (productId: string) => {
+    const product = products.find((p) => p.id === productId);
+    if (product) {
+      setProductToDelete({ id: product.id, name: product.name });
+      setDeleteModalOpen(true);
+    }
+  };
+
+  const confirmDelete = () => {
+    if (productToDelete) {
+      setProducts(products.filter((p) => p.id !== productToDelete.id));
+      setProductToDelete(null);
+    }
+  };
+
+  // Handle authentication redirect in useEffect to avoid SSR and render issues
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push("/seller/auth/login?redirect=/seller/dashboard");
+    }
+  }, [isAuthenticated, router]);
+
+  // Show loading state while redirecting
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F29727] mx-auto mb-4"></div>
+          <p className="text-gray-600">Redirecting to login...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
