@@ -9,12 +9,13 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function ProductDetailPage({
+export default async function ProductDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const product = getProductById(params.id);
+  const { id } = await params;
+  const product = getProductById(id);
 
   if (!product) {
     return (
