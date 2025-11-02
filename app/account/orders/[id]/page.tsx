@@ -22,6 +22,9 @@ import {
 import { getOrderById, getOrderStatusLabel, getOrderStatusColor } from "@/lib/mock-orders";
 import { mockInspectionRequests } from "@/lib/mock-inspection-data";
 
+// Force dynamic rendering for authenticated routes
+export const dynamic = 'force-dynamic';
+
 export default function OrderDetailPage() {
   const params = useParams();
   const router = useRouter();

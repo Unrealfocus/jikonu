@@ -24,6 +24,9 @@ import {
 } from "@/lib/mock-inspection-data";
 import { ChecklistItem } from "@/types/inspector";
 
+// Force dynamic rendering for authenticated routes
+export const dynamic = 'force-dynamic';
+
 export default function InspectionDetailPage() {
   const { inspector, isAuthenticated } = useInspectorAuth();
   const router = useRouter();

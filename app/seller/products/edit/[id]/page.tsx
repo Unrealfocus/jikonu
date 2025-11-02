@@ -7,6 +7,9 @@ import Link from "next/link";
 import { ArrowLeft, Upload, Plus, X } from "lucide-react";
 import { mockSellerProducts } from "@/lib/mock-seller-data";
 
+// Force dynamic rendering for authenticated routes
+export const dynamic = 'force-dynamic';
+
 const categories = [
   "Leather Bags",
   "Shoes",

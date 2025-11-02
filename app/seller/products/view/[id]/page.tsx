@@ -6,6 +6,9 @@ import Link from "next/link";
 import { ArrowLeft, Edit, Trash2, Eye, EyeOff, Package, DollarSign, Clock, Tag } from "lucide-react";
 import { mockSellerProducts } from "@/lib/mock-seller-data";
 
+// Force dynamic rendering for authenticated routes
+export const dynamic = 'force-dynamic';
+
 export default function ViewProductPage() {
   const { isAuthenticated } = useSellerAuth();
   const router = useRouter();

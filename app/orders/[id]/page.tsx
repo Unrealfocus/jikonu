@@ -12,6 +12,9 @@ import {
   Calendar,
 } from "lucide-react";
 
+// Force dynamic rendering for order confirmation pages
+export const dynamic = 'force-dynamic';
+
 export default function OrderConfirmationPage() {
   const params = useParams();
   const orderId = params.id as string;
