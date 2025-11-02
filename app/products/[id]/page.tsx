@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { getProductById } from "@/lib/sample-products";
+import { getProductById, sampleProducts } from "@/lib/sample-products";
 import { useCart } from "@/context/CartContext";
 import {
   ShoppingCart,
@@ -17,6 +17,13 @@ import {
   Heart,
 } from "lucide-react";
 import Link from "next/link";
+
+// Generate static paths for all products at build time
+export async function generateStaticParams() {
+  return sampleProducts.map((product) => ({
+    id: product.id,
+  }));
+}
 
 export default function ProductDetailPage() {
   const params = useParams();
