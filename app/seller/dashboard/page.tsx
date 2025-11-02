@@ -4,6 +4,9 @@ import { useState, useMemo, useEffect } from "react";
 import { useSellerAuth } from "@/context/SellerAuthContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+
+// Force dynamic rendering for authenticated routes
+export const dynamic = 'force-dynamic';
 import {
   Package,
   ShoppingBag,

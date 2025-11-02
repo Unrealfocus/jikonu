@@ -8,6 +8,9 @@ import { Heart, ArrowLeft, ShoppingCart, Trash2 } from "lucide-react";
 import { sampleProducts } from "@/lib/sample-products";
 import { useCart } from "@/context/CartContext";
 
+// Force dynamic rendering for authenticated routes
+export const dynamic = 'force-dynamic';
+
 export default function WishlistPage() {
   const { isAuthenticated } = useAuth();
   const { addToCart } = useCart();

@@ -5,6 +5,9 @@ import { useAuth } from "@/context/AuthContext";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+
+// Force dynamic rendering for authenticated routes
+export const dynamic = 'force-dynamic';
 import {
   User,
   Package,

@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import { useInspectorAuth } from "@/context/InspectorAuthContext";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+
+// Force dynamic rendering for authenticated routes
+export const dynamic = 'force-dynamic';
 import {
   Shield,
   ClipboardCheck,
